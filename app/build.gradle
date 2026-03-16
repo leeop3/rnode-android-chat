@@ -1,6 +1,43 @@
 plugins {
-    id 'com.android.application'
-    id 'com.chaquo.python'
+    buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.2.2"
+        classpath "com.chaquo.python:gradle:15.0.1"
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'com.chaquo.python'
+
+android {
+    namespace "com.example.rnodechat"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.rnodechat"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+chaquopy {
+    python {
+        pip {
+            install "rns"
+            install "lxmf"
+            install "pillow"
+        }
+    }
+}
+
+dependencies {
+}
 }
 
 android {
