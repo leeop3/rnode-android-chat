@@ -1,15 +1,3 @@
-plugins {
-    buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:8.2.2"
-        classpath "com.chaquo.python:gradle:15.0.1"
-    }
-}
-
 apply plugin: 'com.android.application'
 apply plugin: 'com.chaquo.python'
 
@@ -24,8 +12,16 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
 }
 
+// Chaquopy plugin configuration
 chaquopy {
     python {
         pip {
@@ -36,30 +32,11 @@ chaquopy {
     }
 }
 
-dependencies {
-}
-}
-
-android {
-    namespace "com.example.rnodechat"
-    compileSdk 34
-
-    defaultConfig {
-        applicationId "com.example.rnodechat"
-        minSdk 24
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
-    }
-}
-
-python {
-    pip {
-        install "rns"
-        install "lxmf"
-        install "pillow"
-    }
+repositories {
+    google()
+    mavenCentral()
 }
 
 dependencies {
+    // add any dependencies if needed
 }
