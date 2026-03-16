@@ -21,11 +21,13 @@ android {
     }
 }
 
+// Chaquopy 15+ correct syntax
 chaquopy {
-    pip {
-        install "rns"
-        install "lxmf"
-        install "pillow"
+    dependencies {
+        // Python packages
+        implementation "rns"
+        implementation "lxmf"
+        implementation "pillow"
     }
 }
 
@@ -35,5 +37,5 @@ repositories {
 }
 
 dependencies {
-    // add Android dependencies here if needed
+    // add Android dependencies if needed
 }
