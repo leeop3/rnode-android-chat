@@ -1,0 +1,54 @@
+name: Build Android APK
+
+# Run workflow on pushes to main branch
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    # Use GitHub-hosted Ubuntu runner
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Java (required for Gradle)
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      # 3. Install Android SDK
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          api-level: 34
+          build-tools: "34.0.0"
+          ndk: "25.2.9519653"
+          components: "platform-tools"
+
+      # 4. Install Gradle
+      - name: Install Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 8.2
+
+      # 5. Grant execute permission for wrapper
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      # 6. Build APK
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
+
+      # 7. Upload APK as artifact
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: rnode-chat-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
