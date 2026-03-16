@@ -21,14 +21,11 @@ android {
     }
 }
 
-// Chaquopy plugin configuration
 chaquopy {
-    python {
-        pip {
-            install "rns"
-            install "lxmf"
-            install "pillow"
-        }
+    pip {
+        install "rns"
+        install "lxmf"
+        install "pillow"
     }
 }
 
@@ -38,5 +35,5 @@ repositories {
 }
 
 dependencies {
-    // add any dependencies if needed
+    // add Android dependencies here if needed
 }
