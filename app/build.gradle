@@ -1,0 +1,28 @@
+plugins {
+    id 'com.android.application'
+    id 'com.chaquo.python'
+}
+
+android {
+    namespace "com.example.rnodechat"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.rnodechat"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+python {
+    pip {
+        install "rns"
+        install "lxmf"
+        install "pillow"
+    }
+}
+
+dependencies {
+}
